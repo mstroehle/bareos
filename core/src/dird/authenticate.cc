@@ -65,7 +65,7 @@ static char Dir_sorry[] = "1999 You are not authorized.\n";
  */
 bool AuthenticateWithStorageDaemon(BareosSocket* sd, JobControlRecord *jcr, StorageResource *store)
 {
-  if (IsTlsConfigured(store)) {
+  if (store->IsTlsConfigured()) {
     std::string qualified_resource_name;
     if (!my_config->GetQualifiedResourceNameTypeConverter()->ResourceToString(me->hdr.name, my_config->r_own_,
                                                                               qualified_resource_name)) {

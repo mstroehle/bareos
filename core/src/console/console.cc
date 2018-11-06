@@ -885,7 +885,7 @@ BareosSocket *ConnectToDirector(JobControlRecord &jcr, utime_t heart_beat, char 
     local_tls_resource = director_resource;
   }
 
-  if (IsTlsConfigured(local_tls_resource)) {
+  if (local_tls_resource->IsTlsConfigured()) {
     std::string qualified_resource_name;
     if (!my_config->GetQualifiedResourceNameTypeConverter()->ResourceToString(name, my_config->r_own_,
                                                                               qualified_resource_name)) {

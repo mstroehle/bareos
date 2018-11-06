@@ -1631,7 +1631,7 @@ static bool ReplicateCmd(JobControlRecord *jcr)
    }
    Dmsg0(110, "Connection OK to SD.\n");
 
-   if (IsTlsConfigured(me)) {
+   if (me->IsTlsConfigured()) {
      std::string qualified_resource_name;
      if (!my_config->GetQualifiedResourceNameTypeConverter()->ResourceToString(
              JobName, R_JOB, JobId, qualified_resource_name)) {

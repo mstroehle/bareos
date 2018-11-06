@@ -337,9 +337,13 @@ public:
 
 class TlsResource : public BareosResource {
  public:
-   s_password password; /* UA server password */
+  s_password password; /* UA server password */
   TlsConfigCert tls_cert; /* TLS structure */
   TlsConfigPsk tls_psk;   /* TLS-PSK structure */
+
+  bool IsTlsConfigured() const {
+    return tls_cert.IsActivated() || tls_psk.IsActivated();
+  }
 };
 
 /*

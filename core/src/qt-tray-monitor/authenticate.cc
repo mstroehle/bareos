@@ -75,7 +75,7 @@ static AuthenticationResult AuthenticateWithDirector(JobControlRecord *jcr, Dire
 
    BareosSocket *dir = jcr->dir_bsock;
    MonitorResource *monitor = MonitorItemThread::instance()->getMonitor();
-   if (IsTlsConfigured(dir_res)) {
+   if (dir_res->IsTlsConfigured()) {
      std::string qualified_resource_name;
      if (!my_config->GetQualifiedResourceNameTypeConverter()->ResourceToString(
                     monitor->name(), R_CONSOLE, qualified_resource_name)) {
@@ -107,7 +107,7 @@ static AuthenticationResult AuthenticateWithStorageDaemon(JobControlRecord *jcr,
 
    BareosSocket *sd = jcr->store_bsock;
    MonitorResource *monitor = MonitorItemThread::instance()->getMonitor();
-   if (IsTlsConfigured(store)) {
+   if (store->IsTlsConfigured()) {
      std::string qualified_resource_name;
      if (!my_config->GetQualifiedResourceNameTypeConverter()->ResourceToString(
                     monitor->name(), R_DIRECTOR, qualified_resource_name)) {
@@ -177,7 +177,7 @@ static AuthenticationResult AuthenticateWithFileDaemon(JobControlRecord *jcr, Cl
 
    BareosSocket *fd = jcr->file_bsock;
    MonitorResource *monitor = MonitorItemThread::instance()->getMonitor();
-   if (IsTlsConfigured(client)) {
+   if (client->IsTlsConfigured()) {
      std::string qualified_resource_name;
      if (!my_config->GetQualifiedResourceNameTypeConverter()->ResourceToString(
                     monitor->name(), R_DIRECTOR, qualified_resource_name)) {

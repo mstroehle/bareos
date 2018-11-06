@@ -1013,11 +1013,6 @@ bool ConfigurationParser::GetPathOfNewResource(PoolMem &path, PoolMem &extramsg,
    return true;
 }
 
-bool IsTlsConfigured(TlsResource *tls_resource)
-{
-  return tls_resource->tls_cert.IsActivated() || tls_resource->tls_psk.IsActivated();
-}
-
 bool ConfigurationParser::GetCleartextConfigured(bool &cleartext, TlsResource **tls_resource_out) const
 {
   TlsResource *tls_resource = reinterpret_cast<TlsResource *>(GetNextRes(r_own_, nullptr));
@@ -1025,7 +1020,7 @@ bool ConfigurationParser::GetCleartextConfigured(bool &cleartext, TlsResource **
     Dmsg1(100, "Could not find own tls resource: %d\n", r_own_);
     return false;
   }
-  cleartext = !IsTlsConfigured(tls_resource);
+  cleartext = !tls_resource->IsTlsConfigured();
   if (tls_resource_out) {
     *tls_resource_out = tls_resource;
   }

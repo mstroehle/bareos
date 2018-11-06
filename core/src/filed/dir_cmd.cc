@@ -1581,7 +1581,7 @@ static bool StorageCmd(JobControlRecord *jcr)
 
    jcr->store_bsock = storage_daemon_socket;
 
-   if (IsTlsConfigured(me)) {
+   if (me->IsTlsConfigured()) {
     std::string qualified_resource_name;
     if (!my_config->GetQualifiedResourceNameTypeConverter()->ResourceToString(
             jcr->Job, R_JOB, jcr->JobId, qualified_resource_name)) {
@@ -2163,7 +2163,7 @@ static BareosSocket *connect_to_director(JobControlRecord *jcr, DirectorResource
     return nullptr;
   }
 
-  if (IsTlsConfigured(dir_res)) {
+  if (dir_res->IsTlsConfigured()) {
     std::string qualified_resource_name;
     if (!my_config->GetQualifiedResourceNameTypeConverter()->ResourceToString(me->hdr.name, my_config->r_own_,
                                                                               qualified_resource_name)) {
